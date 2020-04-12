@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jianfei.essearch.mapper.WifiDeviceLogMonthMapper">
+
+    <resultMap id="BaseResultMap" type="com.jianfei.essearch.model.WifiDeviceLogMonth">
+        <result column="_id" property="id" />
+        <result column="ap_serial" property="apSerial" />
+        <result column="connection_count" property="connectionCount" />
+        <result column="auth_count" property="authCount"/>
+        <result column="device_count" property="deviceCount"/>
+        <result column="tx_rx_byte" property="txRxByte"/>
+        <result column="log_date" property="logDate"/>
+        <result column="store_id" property="storeId" />
+    </resultMap>
+
+    <sql id="Base_Column_List_insert">
+	    ap_serial, connection_count, auth_count, device_count, tx_rx_byte, log_date, store_id
+  	</sql>
+
+    <insert id="saveWifiDevLogsMonth" parameterType="com.jianfei.essearch.model.WifiDeviceLogMonth">
+        insert into wifi_device_log_month
+        ( <include refid="Base_Column_List_insert" /> )
+        values
+        (
+        #{log.apSerial,jdbcType=VARCHAR},
+        #{log.connectionCount,jdbcType=INTEGER},
+        #{log.authCount,jdbcType=INTEGER},
+        #{log.deviceCount,jdbcType=INTEGER},
+        #{log.txRxByte,jdbcType=DOUBLE},
+        #{log.logDate,jdbcType=TIMESTAMP},
+        #{log.storeId,jdbcType=INTEGER}
+        )
+    </insert>
+
+</mapper>
